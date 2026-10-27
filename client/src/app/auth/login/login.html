@@ -1,15 +1,15 @@
 <app-auth-shell>
   <div class="mb-8">
-    <p class="mb-3 text-sm font-semibold tracking-wide text-indigo-700">BEM-VINDO(a) DE VOLTA</p>
+    <p class="mb-3 text-sm font-semibold tracking-wide text-amber-700">BEM-VINDO(a) DE VOLTA</p>
     <h2
       #tituloPagina
-      class="text-3xl font-semibold tracking-tight text-slate-950 focus:outline-none"
+      class="text-3xl font-semibold tracking-tight text-amber-950 focus:outline-none"
     >
       Acesse sua conta
     </h2>
 
-    <p class="mt-2 text-sm leading-6 text-slate-600">
-      Entre para continuar sua jornada de aprendizado
+    <p class="mt-2 text-sm leading-6 text-amber-600">
+      Entre para continuar seus agendamentos
     </p>
   </div>
 
@@ -22,14 +22,14 @@
 
   <form (submit)="enviarFormulario($event)" novalidate class="space-y-5">
     <div>
-      <label for="login-email" class="mb-2 block text-sm font-medium text-slate-800">Email</label>
+      <label for="login-email" class="mb-2 block text-sm font-medium text-amber-800">Email</label>
 
       <input
         id="login-email"
         type="email"
         autocomplete="email"
         inputmode="email"
-        class="w-full rounded-xl border border-slate-300 bg-white px-4 py-3 text-sm text-slate-950 outline-none transition placeholder:text-slate-400 hover:border-slate-400 focus:border-indigo-600 focus:ring-4 focus:ring-indigo-600/15 aria-[invalid=true]:border-rose-600"
+        class="w-full rounded-xl border border-amber-500 bg-white px-4 py-3 text-sm text-amber-950 outline-none transition placeholder:text-amber-500 hover:border-amber-500 focus:border-indigo-600 focus:ring-4 focus:ring-indigo-600/15 aria-[invalid=true]:border-rose-600"
         placeholder="voce@exemplo.com"
         [formField]="formularioLogin.email"
         [attr.aria-invalid]="formularioLogin.email().touched() && formularioLogin.email().invalid()"
@@ -48,15 +48,15 @@
     </div>
 
     <div>
-      <label for="login-senha" class="mb-2 block text-sm font-medium text-slate-800">Senha</label>
+      <label for="login-senha" class="mb-2 block text-sm font-medium text-amber-800">Senha</label>
 
-      <span class="text-xs text-slate-500">Mínimo de 8 caracteres</span>
+      <span class="text-xs text-amber-500">Mínimo de 8 caracteres</span>
 
       <input
         id="login-senha"
         type="password"
         autocomplete="password"
-        class="w-full rounded-xl border border-slate-300 bg-white px-4 py-3 text-sm text-slate-950 outline-none transition placeholder:text-slate-400 hover:border-slate-400 focus:border-indigo-600 focus:ring-4 focus:ring-indigo-600/15 aria-[invalid=true]:border-rose-600"
+        class="w-full rounded-xl border border-amber-500 bg-white px-4 py-3 text-sm text-amber-950 outline-none transition placeholder:text-amber-500 hover:border-amber-500 focus:border-indigo-600 focus:ring-4 focus:ring-indigo-600/15 aria-[invalid=true]:border-rose-600"
         placeholder="Sua senha"
         [formField]="formularioLogin.senha"
         [attr.aria-invalid]="formularioLogin.senha().touched() && formularioLogin.senha().invalid()"
@@ -76,17 +76,17 @@
 
     <button
       type="submit"
-      class="inline-flex w-full items-center justify-center gap-2 rounded-xl bg-indigo-700 px-5 py-3.5 text-sm font-semibold text-white shadow-sm transition hover:bg-indigo-800 focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-indigo-700 disabled:cursor-wait disabled:opacity-70"
+      class="inline-flex w-full items-center justify-center gap-2 rounded-xl bg-amber-700 px-5 py-3.5 text-sm font-semibold text-white shadow-sm transition hover:bg-indigo-800 focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-indigo-700 disabled:cursor-wait disabled:opacity-70"
     >
       Entrar na minha conta <svg lucideArrowRight class="size-4" aria-hidden="true"></svg>
     </button>
   </form>
 
-  <p class="mt-7 text-center text-sm text-slate-600">
+  <p class="mt-7 text-center text-sm text-amber-600">
     Ainda não tem uma conta?
     <a
       routerLink="/cadastro"
-      class="font-semibold text-indigo-700 underline decoration-indigo-300 underline-offset-4 hover:text-indigo-900 focus-visible:rounded focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-indigo-700"
+      class="font-semibold text-amber-700 underline decoration-amber-500 underline-offset-4 hover:text-amber-900 focus-visible:rounded focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-amber-700"
       >Criar conta</a
     >
   </p>

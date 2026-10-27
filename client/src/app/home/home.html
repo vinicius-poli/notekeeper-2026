@@ -1,40 +1,5 @@
 <main class="min-h-screen bg-[#fbf8ee] text-amber-950">
-  <header class="border-b border-amber-900/15 bg-[#fffdf5]">
-    <div class="mx-auto flex max-w-7xl items-center justify-between px-5 py-4 sm:px-8">
-      <a
-        routerLink="/"
-        class="inline-flex items-center gap-3 rounded-lg text-lg font-semibold tracking-tight"
-      >
-        <span
-          class="grid size-10 place-items-center rounded-xl bg-[#3b2219] text-amber-200"
-          aria-hidden="true"
-          >N</span
-        >
-        <span class="text-amber-900">Note</span><span class="-ml-3 text-amber-900">keeper</span>
-      </a>
-
-      <span class="flex gap-2">
-        @if (sessaoAutenticada(); as sessao) {
-          <div class="flex items-center gap-3 sm:gap-5">
-            <p class="hidden text-sm text-amber-950 sm:block">{{ sessao.usuario.email }}</p>
-
-            <button
-              (click)="authService.encerrarSessao()"
-              class="px-4 py-2.5 text-sm font-semibold text-amber-900 rounded-lg hover:bg-amber-900/10 focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-amber-800"
-            >
-              Sair
-            </button>
-          </div>
-        } @else {
-          <a
-            routerLink="/login"
-            class="bg-amber-800 text-amber-50 px-4 py-2.5 text-sm font-semibold rounded-lg hover:bg-amber-900 focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-amber-800 shadow-sm"
-            >Entrar</a
-          >
-        }
-      </span>
-    </div>
-  </header>
+  <app-navbar></app-navbar>
 
   <section class="mx-auto max-w-7xl px-5 py-16 sm:px-8 sm:py-24">
     @if (sessaoAutenticada(); as sessao) {

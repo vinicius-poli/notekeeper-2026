@@ -14,12 +14,14 @@
     </p>
   </div>
 
-  <div
-    class="mb-5 rounded-xl border border-rose-200 bg-rose-50 px-4 py-3 text-sm text-rose-900"
-    role="alert"
-  >
-    Notificação de erro
-  </div>
+  @if (mensagemErro()) {
+    <div
+      class="mb-5 rounded-xl border border-rose-200 bg-rose-50 px-4 py-3 text-sm text-rose-900"
+      role="alert"
+    >
+      {{ mensagemErro() }}
+    </div>
+  }
 
   <form (submit)="enviarFormulario($event)" novalidate class="space-y-5">
     <div>
@@ -87,6 +89,8 @@
     <button
       type="submit"
       class="inline-flex w-full items-center justify-center gap-2 rounded-xl bg-amber-700 px-5 py-3.5 text-sm font-semibold text-white shadow-sm transition hover:bg-amber-800 focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-amber-700 disabled:cursor-wait disabled:opacity-70"
+        [disabled]="enviandoFormulario()"
+        [attr.aria-busy]="enviandoFormulario()"
     >
       Criar minha conta <svg lucideArrowRight class="size-4" aria-hidden="true"></svg>
     </button>

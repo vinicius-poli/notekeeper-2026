@@ -3,7 +3,14 @@ import { email, form, FormField, minLength, pattern, required } from '@angular/f
 import { Router, RouterLink } from '@angular/router';
 import { LucideArrowRight } from '@lucide/angular';
 
-import { CadastroConcluidoNavigationState, CadastroRequest } from '../auth.models';
+import {
+  ApiValidationProblemDetails,
+  CadastroConcluidoNavigationState,
+  CadastroRequest,
+  UsuarioDto,
+} from '../auth.models';
+import { Observer } from 'rxjs';
+import { HttpErrorResponse } from '@angular/common/http';
 import { AuthService } from '../auth.service';
 import { AuthShell } from '../shell/auth-shell';
 
@@ -34,6 +41,9 @@ export class Cadastro {
     });
   });
 
+  protected readonly mensagemErro = signal('');
+  protected readonly enviandoFormulario = signal(false);
+
   constructor() {
     afterNextRender(() => this.tituloPagina()?.nativeElement.focus());
   }
@@ -50,17 +60,51 @@ export class Cadastro {
 
     const modelo = this.modeloCadastro();
 
-    const requisicao: CadastroRequest = {
+    const request: CadastroRequest = {
       email: modelo.email,
       senha: modelo.senha,
     };
 
-    this.authService.cadastrar(requisicao).subscribe((usuario) => {
-      const estadoNavegacao: CadastroConcluidoNavigationState = {
-        emailCadastrado: usuario.email,
-      };
+    this.mensagemErro.set('');
+    this.enviandoFormulario.set(true);
 
-      void this.router.navigateByUrl('/login', { state: estadoNavegacao });
-    });
+    this.mensagemErro.set('');
+    this.enviandoFormulario.set(true);
+
+    const observer: Partial<Observer<UsuarioDto>> = {
+      next: (usuario) => {
+        this.enviandoFormulario.set(false);
+
+        const estadoNavegacao: CadastroConcluidoNavigationState = {
+          emailCadastrado: usuario.email,
+        };
+
+        void this.router.navigateByUrl('/login', { state: estadoNavegacao });
+      },
+      error: (response: HttpErrorResponse) => {
+        this.enviandoFormulario.set(false);
+
+        const mensagem =
+          response.status === 409
+            ? 'Este email já está cadastrado. Entre na sua conta ou use outro email.'
+            : this.obterMensagemErroApi(response);
+
+        this.mensagemErro.set(mensagem);
+      },
+    };
+
+    this.authService.cadastrar(request).subscribe(observer);
   }
+
+  private obterMensagemErroApi(response: HttpErrorResponse): string {
+    const problem = response.error as ApiValidationProblemDetails | null;
+
+    if (problem?.errors) {
+      const mensagens = Object.values(problem.errors).flat();
+
+      if (mensagens.length > 0) return mensagens.join('\n');
+    }
+
+    return problem?.detail ?? 'Não foi possível criar sua conta. Tente novamente em instantes';
+  }  
 }

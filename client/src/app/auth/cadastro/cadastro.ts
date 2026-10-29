@@ -12,7 +12,6 @@ import {
 import { Observer } from 'rxjs';
 import { HttpErrorResponse } from '@angular/common/http';
 import { AuthService } from '../auth.service';
-import { AuthShell } from '../shell/auth-shell';
 
 interface CadastroFormModel {
   readonly email: string;
@@ -20,7 +19,7 @@ interface CadastroFormModel {
 }
 
 @Component({
-  imports: [LucideArrowRight, AuthShell, FormField, RouterLink],
+  imports: [LucideArrowRight, FormField, RouterLink],
   selector: 'app-cadastro',
   templateUrl: './cadastro.html',
 })

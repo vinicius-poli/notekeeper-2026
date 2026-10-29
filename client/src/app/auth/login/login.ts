@@ -1,6 +1,5 @@
 import { afterNextRender, Component, ElementRef, inject, signal, viewChild } from '@angular/core';
 import { LucideArrowRight } from '@lucide/angular';
-import { AuthShell } from '../shell/auth-shell';
 import { Router, RouterLink } from '@angular/router';
 import { email, form, FormField, minLength, required } from '@angular/forms/signals';
 import {
@@ -19,7 +18,7 @@ interface LoginFormModel {
 }
 
 @Component({
-  imports: [LucideArrowRight, AuthShell, FormField, RouterLink],
+  imports: [LucideArrowRight, FormField, RouterLink],
   selector: 'app-login',
   templateUrl: './login.html',
 })

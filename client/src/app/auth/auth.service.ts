@@ -40,7 +40,7 @@ export class AuthService {
     localStorage.removeItem(this.chaveArmazenamento);
     this.sessaoState.set(null);
 
-    void this.router.navigateByUrl('/login');
+    void this.router.navigateByUrl('/auth/login');
   }
 
   private salvarSessao(token: TokenDto, email: string): void {

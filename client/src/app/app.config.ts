@@ -19,6 +19,24 @@ const routes: Routes = [
     loadComponent: () => import('./auth/login/login').then((c) => c.Login),
   },
   {
+    path: 'categorias',
+    loadComponent: () =>
+      import('./categorias/shell/categorias-shell').then((c) => c.CategoriasShell),
+    children: [
+      { path: '', redirectTo: 'listar', pathMatch: 'full' },
+      {
+        path: 'listar',
+        loadComponent: () =>
+          import('./categorias/listar/listar-categorias').then((c) => c.ListarCategorias),
+      },
+      {
+        path: 'cadastrar',
+        loadComponent: () =>
+          import('./categorias/cadastrar/cadastrar-categoria').then((c) => c.CadastrarCategoria),
+      },
+    ],
+  },
+  {
     path: '**',
     redirectTo: '',
   },

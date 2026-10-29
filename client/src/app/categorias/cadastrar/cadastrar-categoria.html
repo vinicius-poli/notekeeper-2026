@@ -1,1 +1,69 @@
-<p>cadastrar-categoria works!</p>
+<section class="mx-auto max-w-2xl" aria-labelledby="cadastrar-categoria-titulo">
+  <div class="mb-6">
+    <p class="mb-2 text-sm font-semibold tracking-wide text-indigo-700">GESTÃO DE CATEGORIA</p>
+    <h1
+      id="cadastrar-categoria-titulo"
+      class="text-3xl font-semibold tracking-tight text-slate-950"
+    >
+      Cadastrar categoria
+    </h1>
+    <p class="mt-2 text-slate-600">Registre uma categoria para organizar suas notas.</p>
+  </div>
+
+  @if (mensagemErro()) {
+    <div
+      class="mb-6 rounded-xl border border-rose-200 bg-rose-50 px-4 py-3 text-sm text-rose-900"
+      role="alert"
+    >
+      {{ mensagemErro() }}
+    </div>
+  }
+
+  <form
+    (submit)="cadastrarCategoria($event)"
+    novalidate
+    class="space-y-5 rounded-2xl border border-slate-200 bg-white p-6 shadow-sm sm:p-8"
+  >
+    <div>
+      <label for="categoria-titulo" class="mb-1.5 block text-sm font-medium text-slate-800"
+        >Título da categoria</label
+      >
+      <input
+        id="categoria-titulo"
+        type="text"
+        autocomplete="off"
+        class="w-full rounded-xl border border-slate-300 px-3 py-2.5 text-sm outline-none focus:border-indigo-600 focus:ring-4 focus:ring-indigo-600/15 aria-[invalid=true]:border-rose-600"
+        [formField]="formularioCategoria.titulo"
+        [attr.aria-invalid]="
+          formularioCategoria.titulo().touched() && formularioCategoria.titulo().invalid()
+        "
+        [attr.aria-describedby]="
+          formularioCategoria.titulo().touched() && formularioCategoria.titulo().invalid()
+            ? 'categoria-titulo-erro'
+            : null
+        "
+      />
+
+      @if (formularioCategoria.titulo().touched() && formularioCategoria.titulo().invalid()) {
+        <p id="categoria-titulo-erro" class="mt-1 text-sm text-rose-700">
+          {{ formularioCategoria.titulo().errors()[0].message }}
+        </p>
+      }
+    </div>
+
+    <div class="flex flex-wrap justify-end gap-3 pt-2">
+      <button
+        type="submit"
+        [disabled]="enviandoFormulario()"
+        class="rounded-xl bg-indigo-700 px-5 py-3 text-sm font-semibold text-white hover:bg-indigo-800 focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-indigo-700 disabled:categoriar-wait disabled:opacity-70"
+      >
+        {{ enviandoFormulario() ? 'Cadastrando...' : 'Cadastrar categoria' }}
+      </button>
+      <a
+        routerLink="/categorias/listar"
+        class="rounded-xl border border-slate-300 px-5 py-3 text-sm font-semibold text-slate-700 hover:bg-slate-50 focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-indigo-700"
+        >Cancelar</a
+      >
+    </div>
+  </form>
+</section>

@@ -36,7 +36,7 @@ const routes: Routes = [
           import('./categorias/listar/listar-categorias').then((c) => c.ListarCategorias),
       },
       {
-        path: 'detalhes/:id',
+        path: 'detalhes/:categoriaId',
         loadComponent: () =>
           import('./categorias/detalhes/detalhes-categoria').then((c) => c.DetalhesCategoria),
       },

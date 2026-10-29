@@ -78,7 +78,7 @@ export class Cadastro {
           emailCadastrado: usuario.email,
         };
 
-        void this.router.navigateByUrl('/login', { state: estadoNavegacao });
+        void this.router.navigateByUrl('/auth/login', { state: estadoNavegacao });
       },
       error: (response: HttpErrorResponse) => {
         this.enviandoFormulario.set(false);

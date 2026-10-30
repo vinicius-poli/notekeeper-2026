@@ -2,6 +2,7 @@ import { provideHttpClient, withInterceptors } from '@angular/common/http';
 import { ApplicationConfig, provideBrowserGlobalErrorListeners } from '@angular/core';
 import { provideRouter, Routes } from '@angular/router';
 import { environment } from '../environments/environment';
+import { isAnonymousGuard, isAuthenticatedGuard } from './auth/auth.guards';
 import { CHAVE_ARMAZENAMENTO, URL_API } from './auth/auth.tokens';
 import { authInterceptor } from './auth/auth.interceptor';
 
@@ -12,6 +13,7 @@ const routes: Routes = [
   },
   {
     path: 'auth',
+    canActivate: [isAnonymousGuard],
     loadComponent: () => import('./auth/shell/auth-shell').then((c) => c.AuthShell),
     children: [
       {
@@ -26,6 +28,7 @@ const routes: Routes = [
   },
   {
     path: 'categorias',
+    canActivate: [isAuthenticatedGuard],
     loadComponent: () =>
       import('./categorias/shell/categorias-shell').then((c) => c.CategoriasShell),
     children: [
@@ -54,6 +57,7 @@ const routes: Routes = [
   },
   {
     path: 'notas',
+    canActivate: [isAuthenticatedGuard],
     loadComponent: () => import('./notas/shell/notas-shell').then((c) => c.NotasShell),
     children: [
       { path: '', redirectTo: 'listar', pathMatch: 'full' },

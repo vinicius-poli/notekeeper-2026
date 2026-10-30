@@ -45,6 +45,11 @@ const routes: Routes = [
         loadComponent: () =>
           import('./categorias/cadastrar/cadastrar-categoria').then((c) => c.CadastrarCategoria),
       },
+      {
+        path: 'editar/:categoriaId',
+        loadComponent: () =>
+          import('./categorias/editar/editar-categoria').then((c) => c.EditarCategoria),
+      }
     ],
   },
   {

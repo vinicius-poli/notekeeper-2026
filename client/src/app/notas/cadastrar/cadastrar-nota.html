@@ -1,0 +1,133 @@
+<p>cadastrar-nota works!</p>
+<section class="mx-auto max-w-2xl" aria-labelledby="cadastrar-nota-titulo">
+  <div class="mb-6">
+    <p class="mb-2 text-sm font-semibold tracking-wide text-indigo-700">GESTÃO DE NOTAS</p>
+    <h1 id="cadastrar-nota-titulo" class="text-3xl font-semibold tracking-tight text-slate-950">
+      Cadastrar nota
+    </h1>
+    <p class="mt-2 text-slate-600">Registre uma nota e, se quiser, associe categorias existentes.</p>
+  </div>
+
+  @if (mensagemErro()) {
+    <div
+      class="mb-6 rounded-xl border border-rose-200 bg-rose-50 px-4 py-3 text-sm whitespace-pre-line text-rose-900"
+      role="alert"
+    >
+      {{ mensagemErro() }}
+    </div>
+  }
+
+  <form
+    (submit)="cadastrarNota($event)"
+    novalidate
+    class="space-y-5 rounded-2xl border border-slate-200 bg-white p-6 shadow-sm sm:p-8"
+  >
+    <div>
+      <label for="nota-titulo" class="mb-1.5 block text-sm font-medium text-slate-800">Título</label>
+      <input
+        id="nota-titulo"
+        type="text"
+        autocomplete="off"
+        class="w-full rounded-xl border border-slate-300 px-3 py-2.5 text-sm outline-none focus:border-indigo-600 focus:ring-4 focus:ring-indigo-600/15 aria-[invalid=true]:border-rose-600"
+        [formField]="formularioNota.titulo"
+        [attr.aria-invalid]="formularioNota.titulo().touched() && formularioNota.titulo().invalid()"
+        [attr.aria-describedby]="
+          formularioNota.titulo().touched() && formularioNota.titulo().invalid()
+            ? 'nota-titulo-erro'
+            : null
+        "
+      />
+
+      @if (formularioNota.titulo().touched() && formularioNota.titulo().invalid()) {
+        <p id="nota-titulo-erro" class="mt-1 text-sm text-rose-700">
+          {{ formularioNota.titulo().errors()[0].message }}
+        </p>
+      }
+    </div>
+
+    <div>
+      <label for="nota-descricao" class="mb-1.5 block text-sm font-medium text-slate-800"
+        >Descrição</label
+      >
+      <textarea
+        id="nota-descricao"
+        rows="5"
+        class="w-full rounded-xl border border-slate-300 px-3 py-2.5 text-sm outline-none focus:border-indigo-600 focus:ring-4 focus:ring-indigo-600/15 aria-[invalid=true]:border-rose-600"
+        [formField]="formularioNota.descricao"
+        [attr.aria-invalid]="
+          formularioNota.descricao().touched() && formularioNota.descricao().invalid()
+        "
+        [attr.aria-describedby]="
+          formularioNota.descricao().touched() && formularioNota.descricao().invalid()
+            ? 'nota-descricao-erro'
+            : null
+        "
+      ></textarea>
+      <p class="mt-1 text-sm text-slate-500">Opcional. Até 300 caracteres.</p>
+
+      @if (formularioNota.descricao().touched() && formularioNota.descricao().invalid()) {
+        <p id="nota-descricao-erro" class="mt-1 text-sm text-rose-700">
+          {{ formularioNota.descricao().errors()[0].message }}
+        </p>
+      }
+    </div>
+
+    <fieldset>
+      <legend class="mb-1.5 block text-sm font-medium text-slate-800">Categorias</legend>
+      <p class="mb-3 text-sm text-slate-500">Opcional. Selecione uma ou mais categorias.</p>
+
+      @if (carregandoCategorias()) {
+        <p class="text-sm text-slate-600" role="status">Carregando categorias...</p>
+      } @else if (!categoriasCarregadas()) {
+        <p class="text-sm text-slate-600">As categorias não puderam ser carregadas.</p>
+      } @else if (categorias().length === 0) {
+        <p
+          class="rounded-xl border border-dashed border-slate-300 bg-slate-50 px-4 py-3 text-sm text-slate-600"
+        >
+          Nenhuma categoria cadastrada. A nota pode ser registrada sem categorias.
+          <a
+            routerLink="/categorias/cadastrar"
+            class="font-semibold text-indigo-700 hover:text-indigo-800"
+            >Cadastrar categoria</a
+          >
+        </p>
+      } @else {
+        <ul class="space-y-2">
+          @for (categoria of categorias(); track categoria.id) {
+            <li>
+              <label
+                class="flex items-center gap-3 rounded-xl border border-slate-200 px-3 py-2.5 text-sm text-slate-800 hover:border-indigo-300"
+                [class.border-indigo-600]="categoriaSelecionada(categoria.id)"
+                [class.bg-indigo-50]="categoriaSelecionada(categoria.id)"
+              >
+                <input
+                  #categoriaCheckbox
+                  type="checkbox"
+                  class="size-4 rounded border-slate-300 text-indigo-700 focus:ring-indigo-600"
+                  [checked]="categoriaSelecionada(categoria.id)"
+                  (change)="alternarCategoria(categoria.id, categoriaCheckbox.checked)"
+                />
+                <span class="break-words">{{ categoria.titulo }}</span>
+              </label>
+            </li>
+          }
+        </ul>
+      }
+    </fieldset>
+
+    <div class="flex flex-wrap justify-end gap-3 pt-2">
+      <button
+        type="submit"
+        [disabled]="enviandoFormulario() || carregandoCategorias()"
+        class="rounded-xl bg-indigo-700 px-5 py-3 text-sm font-semibold text-white hover:bg-indigo-800 focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-indigo-700 disabled:cursor-wait disabled:opacity-70"
+      >
+        {{ enviandoFormulario() ? 'Cadastrando...' : 'Cadastrar nota' }}
+      </button>
+      <a
+        routerLink="/notas/listar"
+        class="rounded-xl border border-slate-300 px-5 py-3 text-sm font-semibold text-slate-700 hover:bg-slate-50 focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-indigo-700"
+        >Cancelar</a
+      >
+    </div>
+  </form>
+</section>

@@ -14,6 +14,26 @@
           <p class="mt-5 max-w-xl text-lg leading-8 text-amber-900/80">
           Organize seus horários e acompanhe cada compromisso de sua agenda em um só lugar.
           </p>
+
+          <span class="flex gap-3 items-center mt-8">
+            <a
+              routerLink="/categorias"
+              class="inline-flex items-center gap-2 rounded-xl bg-brand px-5 py-3.5 text-sm font-semibold text-on-dark hover:bg-brand-hover focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-brand"
+            >
+              <svg lucideLibraryBig class="size-4"></svg>
+              Acessar minhas categorias
+              <svg lucideArrowRight class="size-4" aria-hidden="true"></svg>
+            </a>          
+            
+            <a
+              routerLink="/notas"
+              class="inline-flex items-center gap-2 rounded-xl bg-brand px-5 py-3.5 text-sm font-semibold text-on-dark hover:bg-brand-hover focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-brand"
+            >
+              <svg lucideLibraryBig class="size-4"></svg>
+              Acessar minhas notas
+              <svg lucideArrowRight class="size-4" aria-hidden="true"></svg>
+            </a>          
+
           <div
             class="mt-8 inline-flex items-center gap-3 rounded-xl border border-emerald-200 bg-emerald-50 px-4 py-3 text-sm text-emerald-900"
           >
@@ -23,7 +43,8 @@
               ><svg lucideCheck class="size-4" aria-hidden="true"></svg></span
             >Conectado como <strong class="-ml-1">{{ sessao.usuario.email }}</strong>
           </div>
-        </div>
+        </span>
+      </div>
 
         <div class="rounded-3xl bg-[#3b2219] p-8 text-white shadow-xl shadow-amber-950/10 sm:p-10">
           <div class="mb-12 flex items-start justify-between">

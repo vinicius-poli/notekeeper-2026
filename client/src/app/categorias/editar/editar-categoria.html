@@ -1,10 +1,10 @@
 <section class="mx-auto max-w-2xl" aria-labelledby="editar-categoria-titulo">
   <div class="mb-6">
-    <p class="mb-2 text-sm font-semibold tracking-wide text-indigo-700">GESTÃO DE CATEGORIA</p>
-    <h1 id="editar-categoria-titulo" class="text-3xl font-semibold tracking-tight text-slate-950">
+    <p class="mb-2 text-sm font-semibold tracking-wide text-amber-800">GESTÃO DE CATEGORIA</p>
+    <h1 id="editar-categoria-titulo" class="text-3xl font-semibold tracking-tight text-amber-950">
       Editar categoria
     </h1>
-    <p class="mt-2 text-slate-600">Atualize o título desta categoria.</p>
+    <p class="mt-2 text-amber-700">Atualize o título desta categoria.</p>
   </div>
   @if (mensagemErro()) {
   <div class="mb-6 rounded-xl border border-rose-200 bg-rose-50 px-4 py-3 text-sm text-rose-900" role="alert">
@@ -12,16 +12,16 @@
   </div>
   }
   @if (carregando()) {
-  <p class="rounded-2xl border border-slate-200 bg-white p-6 text-slate-600" role="status">
+  <p class="rounded-2xl border border-amber-200 bg-white p-6 text-amber-600" role="status">
     Carregando categoria...
   </p>
   } @else if (formularioVisivel()) {
   <form (submit)="atualizarCategoria($event)" novalidate
-    class="space-y-5 rounded-2xl border border-slate-200 bg-white p-6 shadow-sm sm:p-8">
+    class="space-y-5 rounded-2xl border border-amber-200 bg-white p-6 shadow-sm sm:p-8">
     <div>
-      <label for="categoria-titulo" class="mb-1.5 block text-sm font-medium text-slate-800">Título da categoria</label>
+      <label for="categoria-titulo" class="mb-1.5 block text-sm font-medium text-amber-800">Título da categoria</label>
       <input id="categoria-titulo" type="text" autocomplete="off"
-        class="w-full rounded-xl border border-slate-300 px-3 py-2.5 text-sm outline-none focus:border-indigo-600 focus:ring-4 focus:ring-indigo-600/15 aria-[invalid=true]:border-rose-600"
+        class="w-full rounded-xl border border-amber-300 px-3 py-2.5 text-sm outline-none focus:border-amber-600 focus:ring-4 focus:ring-amber-600/15 aria-[invalid=true]:border-rose-600"
         [formField]="formularioCategoria.titulo" [attr.aria-invalid]="
             formularioCategoria.titulo().touched() && formularioCategoria.titulo().invalid()
           " [attr.aria-describedby]="
@@ -37,11 +37,11 @@
     </div>
     <div class="flex flex-wrap justify-end gap-3 pt-2">
       <button type="submit" [disabled]="enviandoFormulario()"
-        class="rounded-xl bg-indigo-700 px-5 py-3 text-sm font-semibold text-white hover:bg-indigo-800 focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-indigo-700 disabled:cursor-wait disabled:opacity-70">
+        class="rounded-xl bg-amber-700 px-5 py-3 text-sm font-semibold text-white hover:bg-amber-800 focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-amber-700 disabled:cursor-wait disabled:opacity-70">
         {{ enviandoFormulario() ? 'Salvando...' : 'Salvar alterações' }}
       </button>
       <a routerLink="/categorias/listar"
-        class="rounded-xl border border-slate-300 px-5 py-3 text-sm font-semibold text-slate-700 hover:bg-slate-50 focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-indigo-700">Cancelar</a>
+        class="rounded-xl border border-amber-300 px-5 py-3 text-sm font-semibold text-amber-700 hover:bg-amber-50 focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-amber-700">Cancelar</a>
     </div>
   </form>
   }

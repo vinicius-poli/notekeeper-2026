@@ -18,31 +18,21 @@
           <span class="flex gap-3 items-center mt-8">
             <a
               routerLink="/categorias"
-              class="inline-flex items-center gap-2 rounded-xl bg-brand px-5 py-3.5 text-sm font-semibold text-on-dark hover:bg-brand-hover focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-brand"
+              class="inline-flex items-center rounded-xl bg-amber-500 px-3 py-3.5 text-sm font-semibold text-on-dark hover:bg-amber-600 focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-brand"
             >
               <svg lucideLibraryBig class="size-4"></svg>
-              Acessar minhas categorias
-              <svg lucideArrowRight class="size-4" aria-hidden="true"></svg>
+              <span class="-ml-3">Minhas categorias</span>
+              <svg lucideArrowRight class="size-4 ml-2" aria-hidden="true"></svg>
             </a>          
             
             <a
               routerLink="/notas"
-              class="inline-flex items-center gap-2 rounded-xl bg-brand px-5 py-3.5 text-sm font-semibold text-on-dark hover:bg-brand-hover focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-brand"
+              class="inline-flex items-center rounded-xl bg-amber-500 px-3 py-3.5 text-sm font-semibold text-on-dark hover:bg-amber-600 focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-brand"
             >
               <svg lucideLibraryBig class="size-4"></svg>
-              Acessar minhas notas
-              <svg lucideArrowRight class="size-4" aria-hidden="true"></svg>
-            </a>          
-
-          <div
-            class="mt-8 inline-flex items-center gap-3 rounded-xl border border-emerald-200 bg-emerald-50 px-4 py-3 text-sm text-emerald-900"
-          >
-            <span
-              class="grid size-7 place-items-center rounded-full bg-emerald-100 font-bold"
-              aria-hidden="true"
-              ><svg lucideCheck class="size-4" aria-hidden="true"></svg></span
-            >Conectado como <strong class="-ml-1">{{ sessao.usuario.email }}</strong>
-          </div>
+              <span class="-ml-3">Minhas notas</span>
+              <svg lucideArrowRight class="size-4 ml-2" aria-hidden="true"></svg>
+            </a>            
         </span>
       </div>
 

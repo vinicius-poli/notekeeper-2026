@@ -8,24 +8,24 @@
 }
 
 @if (carregando()) {
-  <p class="rounded-2xl border border-slate-200 bg-white p-6 text-slate-600" role="status">
+  <p class="rounded-2xl border border-amber-200 bg-amber-50 p-6 text-amber-600" role="status">
     Carregando categoria...
   </p>
 } @else if (categoria(); as categoria) {
-<section class="rounded-2xl border border-slate-200 bg-white p-6 shadow-sm sm:p-8">
+<section class="rounded-2xl border border-amber-200 bg-amber-50 p-6 shadow-sm sm:p-8">
   <div class="flex items-end justify-between gap-4">
     <dl class="min-w-0">
-      <dt class="text-sm font-medium text-slate-500">Título</dt>
-      <dd class="mt-1 break-words text-xl font-semibold text-slate-950">{{ categoria.titulo }}</dd>
+      <dt class="text-sm font-medium text-amber-500">Título</dt>
+      <dd class="mt-1 break-words text-xl font-semibold text-amber-950">{{ categoria.titulo }}</dd>
     </dl>
 
     <div class="flex shrink-0 gap-3">
       <a [routerLink]="['/categorias/editar', categoria.id]"
-        class="rounded-xl bg-indigo-700 px-5 py-3 text-sm font-semibold text-white hover:bg-indigo-800 focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-indigo-700">
+        class="rounded-xl bg-amber-700 px-5 py-3 text-sm font-semibold text-amber-50 hover:bg-amber-800 focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-amber-700">
         Editar
     </a>
       <button type="button" (click)="abrirConfirmacao()"
-        class="rounded-xl border border-rose-300 px-5 py-3 text-sm font-semibold text-rose-700 hover:bg-rose-50 focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-rose-700">
+        class="rounded-xl border border-red-600 px-5 py-3 text-sm font-semibold text-red-600 hover:bg-red-500 hover:text-white focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-rose-700">
         Excluir
       </button>
     </div>
@@ -36,11 +36,11 @@
     <p class="text-sm text-rose-900">Esta categoria será removida.</p>
     <div class="mt-4 flex flex-wrap justify-end gap-3">
       <button type="button" (click)="confirmarExclusao()" [disabled]="excluindo()"
-        class="rounded-xl bg-rose-700 px-5 py-3 text-sm font-semibold text-white hover:bg-rose-800 focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-rose-700 disabled:cursor-wait disabled:opacity-70">
+        class="rounded-xl bg-red-600 px-5 py-3 text-sm font-semibold text-amber-50 hover:bg-red-900 focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-rose-700 disabled:cursor-wait disabled:opacity-70">
         {{ excluindo() ? 'Excluindo...' : 'Excluir categoria' }}
       </button>
       <button type="button" (click)="cancelarExclusao()" [disabled]="excluindo()"
-        class="rounded-xl border border-slate-300 bg-white px-5 py-3 text-sm font-semibold text-slate-700 hover:bg-slate-50 focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-indigo-700 disabled:cursor-wait disabled:opacity-70">
+        class="rounded-xl border border-amber-600 bg-amber-50 px-5 py-3 text-sm font-semibold text-amber-700 hover:bg-amber-50 focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-amber-700 disabled:cursor-wait disabled:opacity-70">
         Cancelar
       </button>
     </div>

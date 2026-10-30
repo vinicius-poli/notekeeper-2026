@@ -1,8 +1,8 @@
 import { afterNextRender, Component, ElementRef, inject, signal, viewChild } from '@angular/core';
-import { email, form, FormField, minLength, pattern, required } from '@angular/forms/signals';
 import { Router, RouterLink } from '@angular/router';
 import { LucideArrowRight } from '@lucide/angular';
-
+import { email, form, FormField, minLength, pattern, required } from '@angular/forms/signals';
+import { AuthService } from '../auth.service';
 import {
   ApiValidationProblemDetails,
   CadastroConcluidoNavigationState,
@@ -11,13 +11,12 @@ import {
 } from '../auth.models';
 import { Observer } from 'rxjs';
 import { HttpErrorResponse } from '@angular/common/http';
-import { AuthService } from '../auth.service';
 
 interface CadastroFormModel {
+  readonly nome: string;
   readonly email: string;
   readonly senha: string;
 }
-
 @Component({
   imports: [LucideArrowRight, FormField, RouterLink],
   selector: 'app-cadastro',
@@ -29,8 +28,17 @@ export class Cadastro {
 
   private readonly tituloPagina = viewChild<ElementRef<HTMLHeadingElement>>('tituloPagina');
 
-  protected readonly modeloCadastro = signal<CadastroFormModel>({ email: '', senha: '' });
-  protected readonly formularioCadastro = form(this.modeloCadastro, (modelo) => {
+  protected readonly modeloFormulario = signal<CadastroFormModel>({
+    nome: '',
+    email: '',
+    senha: '',
+  });
+
+  protected readonly formularioCadastro = form(this.modeloFormulario, (modelo) => {
+    required(modelo.nome, { message: 'Informe seu nome.' });
+    pattern(modelo.nome, /\S/, {
+      message: 'O nome não pode conter apenas espaços.',
+    });
     required(modelo.email, { message: 'Informe seu email.' });
     email(modelo.email, { message: 'Informe um email válido.' });
     required(modelo.senha, { message: 'Informe sua senha.' });
@@ -47,21 +55,18 @@ export class Cadastro {
     afterNextRender(() => this.tituloPagina()?.nativeElement.focus());
   }
 
-  protected enviarFormulario(event: SubmitEvent): void {
+  protected enviarFormulario(event: SubmitEvent) {
     event.preventDefault();
 
-    const formulario = this.formularioCadastro();
-
-    if (formulario.invalid()) {
-      formulario.markAsTouched();
+    if (this.formularioCadastro().invalid()) {
+      this.formularioCadastro().markAsTouched();
       return;
     }
 
-    const modelo = this.modeloCadastro();
-
     const request: CadastroRequest = {
-      email: modelo.email,
-      senha: modelo.senha,
+      nome: this.modeloFormulario().nome,
+      email: this.modeloFormulario().email,
+      senha: this.modeloFormulario().senha,
     };
 
     this.mensagemErro.set('');
@@ -105,5 +110,5 @@ export class Cadastro {
     }
 
     return problem?.detail ?? 'Não foi possível criar sua conta. Tente novamente em instantes';
-  }  
+  }
 }

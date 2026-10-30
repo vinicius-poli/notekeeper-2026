@@ -24,6 +24,34 @@
 
 <form (submit)="enviarFormulario($event)" novalidate class="space-y-5">
   <div>
+    <label for="cadastro-nome" class="mb-2 block text-sm font-medium">Nome</label>
+
+    <input
+      id="cadastro-nome"
+      type="text"
+      autocomplete="name"
+      inputmode="text"
+      class="w-full rounded-xl border border-amber-300 bg-white px-4 py-3 text-sm text-amber-950 outline-none transition placeholder:text-amber-400 hover:border-amber-400 focus:border-amber-600 focus:ring-4 focus:ring-amber-600/15 aria-[invalid=true]:border-rose-600"
+      placeholder="Digite o seu nome"
+      [formField]="formularioCadastro.nome"
+      [attr.aria-invalid]="
+        formularioCadastro.nome().touched() && formularioCadastro.nome().invalid()
+      "
+      [attr.aria-describedby]="
+        formularioCadastro.nome().touched() && formularioCadastro.nome().invalid()
+          ? 'cadastro-nome-erro'
+          : null
+      "
+    />
+
+    @if (formularioCadastro.nome().touched() && formularioCadastro.nome().invalid()) {
+      <p id="cadastro-nome-erro" class="mt-1 text-sm text-rose-700">
+        {{ formularioCadastro.nome().errors()[0].message }}
+      </p>
+    }
+  </div>
+
+  <div>
     <label for="cadastro-email" class="mb-2 block text-sm font-medium text-amber-800"
       >Email</label
     >

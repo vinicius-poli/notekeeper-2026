@@ -44,7 +44,7 @@ export class AuthService {
   }
 
   private salvarSessao(token: TokenDto, email: string): void {
-    const usuario: UsuarioDto = { id: token.usuarioId, email: email };
+    const usuario: UsuarioDto = { id: token.usuarioId, nome: token.nome, email: email };
 
     const sessao: SessaoAutenticada = {
       token,
